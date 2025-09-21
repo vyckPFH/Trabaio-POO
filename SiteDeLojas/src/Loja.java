@@ -4,8 +4,8 @@ public class Loja {
     private String nome;
     private int cnpj;
     private String endereco;
-    private LinkedList<Funcionario> funcionarios;
-    private LinkedList<Instrumento> instrumentos;
+    private LinkedList<Funcionario> funcionarios = new LinkedList<>();
+    private LinkedList<Instrumento> instrumentos = new LinkedList<>();
 
     public Loja() {
         this.funcionarios = new LinkedList<>();

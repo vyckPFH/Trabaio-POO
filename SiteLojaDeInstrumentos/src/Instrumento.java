@@ -4,10 +4,19 @@ public class Instrumento {
     private float preco;
     private String cor;
     private int tamanho;
+    private int quantidade;
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 
     public Instrumento() {}
 
-    public Instrumento(String nome, String tipo, float preco, String cor, int tamanho) {
+    public Instrumento(String nome, String tipo, float preco, String cor, int tamanho, int quantidade) {
         this.nome = nome;
         this.tipo = tipo;
         this.preco = preco;

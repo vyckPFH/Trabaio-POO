@@ -41,7 +41,7 @@ public class SiteLojaInstrumentos {
   }
 
   public static void acessarComoFornecedor(Loja loja) {
-
+    
   }
 
   public static void acessarComoCliente(Loja loja) {
@@ -88,7 +88,8 @@ public class SiteLojaInstrumentos {
 
   }
 
-  public static void comprarInstrumento(){
+  public static void comprarInstrumento(Loja loja){
+    int escolha = LER.nextInt();
 
   }
 
@@ -115,16 +116,16 @@ public class SiteLojaInstrumentos {
     loja.getFuncionarios().add(funcionarioFds);
     loja.getFuncionarios().add(slaMano);
 
-    loja.getInstrumentos().add(new Instrumento("Violão Clássico", "Cordas", 750.00f, "Marrom", 2, 5));
-    loja.getInstrumentos().add(new Instrumento("Guitarra Stratocaster", "Cordas", 5500.00f, "Vermelha", 3, 10));
-    loja.getInstrumentos().add(new Instrumento("Baixo Jazz Bass", "Cordas", 2200.00f, "Preto", 3, 2));
-    loja.getInstrumentos().add(new Instrumento("Bateria Acústica", "Percussão", 8500.00f, "Azul", 3, 5));
-    loja.getInstrumentos().add(new Instrumento("Teclado Digital", "Teclas", 4200.00f, "Branco", 2, 3));
-    loja.getInstrumentos().add(new Instrumento("Saxofone Alto", "Sopro", 3900.00f, "Dourado", 2, 2));
-    loja.getInstrumentos().add(new Instrumento("Flauta Transversal", "Sopro", 1200.00f, "Prata", 1, 6));
-    loja.getInstrumentos().add(new Instrumento("Caixa de Bateria", "Percussão", 950.00f, "Preta", 2, 32));
-    loja.getInstrumentos().add(new Instrumento("Pandeiro", "Percussão", 180.00f, "Natural", 1, 8));
-    loja.getInstrumentos().add(new Instrumento("Microfone Dinâmico", "Acessórios", 600.00f, "Cinza", 1, 15));
+    loja.getInstrumentos().add(new Instrumento("Violão Clássico", "Cordas", 750.00f, "Marrom", 2, 5, 03));
+    loja.getInstrumentos().add(new Instrumento("Guitarra Stratocaster", "Cordas", 5500.00f, "Vermelha", 3, 10,01));
+    loja.getInstrumentos().add(new Instrumento("Baixo Jazz Bass", "Cordas", 2200.00f, "Preto", 3, 2, 007));
+    loja.getInstrumentos().add(new Instrumento("Bateria Acústica", "Percussão", 8500.00f, "Azul", 3, 5, 06));
+    loja.getInstrumentos().add(new Instrumento("Teclado Digital", "Teclas", 4200.00f, "Branco", 2, 3, 005));
+    loja.getInstrumentos().add(new Instrumento("Saxofone Alto", "Sopro", 3900.00f, "Dourado", 2, 2, 004));
+    loja.getInstrumentos().add(new Instrumento("Flauta Transversal", "Sopro", 1200.00f, "Prata", 1, 6, 003));
+    loja.getInstrumentos().add(new Instrumento("Caixa de Bateria", "Percussão", 950.00f, "Preta", 2, 32, 002));
+    loja.getInstrumentos().add(new Instrumento("Pandeiro", "Percussão", 180.00f, "Natural", 1, 8, 1));
+    loja.getInstrumentos().add(new Instrumento("Microfone Dinâmico", "Acessórios", 600.00f, "Cinza", 1, 15, 001));
 
     return loja;
   }

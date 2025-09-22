@@ -53,9 +53,17 @@ public class Loja {
         System.out.println("  Catálogo de Instrumentos:");
         int contador = 1;
         for (Instrumento instrumento : instrumentos) {
+
+            if (instrumento.getId() == 0) {
+                System.out.println("----INDISPONIVEL----");
+                System.out.println("    " + contador + ") " + instrumento.getNome() + " | Tipo: " + instrumento.getTipo()
+                    + " | Preço: R$" + instrumento.getPreco() + " | Cor: " + instrumento.getCor() + " | Tamanho: "
+                    + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade() + " | ID para compra: " + instrumento.getId());
+                    contador++;
+            }
             System.out.println("    " + contador + ") " + instrumento.getNome() + " | Tipo: " + instrumento.getTipo()
                     + " | Preço: R$" + instrumento.getPreco() + " | Cor: " + instrumento.getCor() + " | Tamanho: "
-                    + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade());
+                    + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade() + " | ID para compra: " + instrumento.getId());
 
             contador++;
         }

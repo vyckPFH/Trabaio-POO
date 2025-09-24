@@ -1,4 +1,6 @@
+package conceito;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Loja {
     private String nome;
@@ -6,6 +8,8 @@ public class Loja {
     private String endereco;
     private LinkedList<Funcionario> funcionarios = new LinkedList<>();
     private LinkedList<Instrumento> instrumentos = new LinkedList<>();
+
+    final static Scanner LER = new Scanner(System.in);
 
     public Loja() {
         this.funcionarios = new LinkedList<>();
@@ -19,6 +23,98 @@ public class Loja {
         this.funcionarios = new LinkedList<>();
         this.instrumentos = new LinkedList<>();
     }
+
+
+
+    public void removerInstrumento(Loja loja) {
+        System.out.println("Digite o nome do instrumento a ser removido: ");
+        String inxtrumento = LER.next();
+        for (Instrumento instrumentox : loja.getInstrumentos()) {
+          if (instrumentox.getNome().equals(inxtrumento)) {
+            loja.getInstrumentos().remove(instrumentox);
+          }
+        }
+      }
+    
+      public void addInstrumento(Loja loja) {
+    
+        Instrumento instrumento = new Instrumento();
+        System.out.println("Digite o nome do instrumento: ");
+    
+        instrumento.setNome(LER.next());
+    
+        System.out.println("Digite o tipo do instrumento: ");
+        instrumento.setTipo(LER.next());
+    
+        System.out.println("Digite o preço do instrumento: ");
+        instrumento.setPreco(LER.nextFloat());
+    
+        System.out.println("Digite a cor do instrumento: ");
+        instrumento.setCor(LER.next());
+    
+        System.out.println("Digite o tamanho do instrumento: ");
+        instrumento.setTamanho(LER.nextInt());
+    
+        System.out.println("Digite a quantidade em estoque: ");
+        instrumento.setQuantidade(LER.nextInt());
+    
+        System.out.println("Digite o indetificador para vendas do instrumento: ");
+        instrumento.setId(LER.nextInt());
+    
+        loja.getInstrumentos().add(instrumento);
+    
+      }
+    
+      public void registrarFuncionario(Loja loja) {
+        Pessoa pessoa = new Pessoa();
+        Funcionario funcionario = new Funcionario();
+    
+        System.out.print("Digite o nome do proletario: ");
+        pessoa.setNome(LER.next());
+        System.out.println();
+        System.out.print("Digite o cadastro de pessoa fisica: ");
+        pessoa.setCpf(LER.next());
+        System.out.println();
+        System.out.print("Digite o numero de contato do proletario: ");
+        pessoa.setNumero(LER.next());
+        System.out.println();
+    
+        System.out.print("Qual sera o cargo que este funcionario vai desempenhar?: ");
+        funcionario.setCargo(LER.next());
+        System.out.println();
+
+        System.out.print("Qual sera o salario do funcionario?: ");
+        funcionario.setSalario(LER.nextInt());
+        System.out.println();
+
+        funcionario.setPessoa(pessoa);
+    
+        loja.getFuncionarios().add(funcionario);
+      }
+    
+      public void demitirFuncionario(Loja loja) {
+    
+        System.out.println("Digite o nome do funcionario a ser demitido: ");
+        String demitido = LER.next();
+        for (Funcionario funcionario : loja.getFuncionarios()) {
+          if (funcionario.getPessoa().getNome().equals(demitido)) {
+            loja.getFuncionarios().remove(funcionario);
+          }
+        }
+    
+      }
+    
+      public void alterarDadosFuncionario(Loja loja) {
+        
+      }
+    
+      public void alterarInstrumento() {
+      }
+    
+      // public static void comprarInstrumento(Loja loja){
+      // int escolha = LER.nextInt();
+    
+      // }
 
     public void printSlaves() {
         if (funcionarios.isEmpty()) {

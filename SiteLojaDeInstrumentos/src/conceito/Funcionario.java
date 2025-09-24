@@ -1,3 +1,4 @@
+package conceito;
 public class Funcionario {
     private Pessoa pessoa;
     private int salario;

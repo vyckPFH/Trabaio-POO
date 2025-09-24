@@ -1,3 +1,4 @@
+package conceito;
 public class Cliente {
     private Pessoa pessoa;
     private boolean desconto;

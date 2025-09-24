@@ -1,11 +1,9 @@
 package conceito;
 public class Cliente {
     private Pessoa pessoa;
-    private boolean desconto;
+    private int desconto;
 
-    public Cliente() {}
-
-    public Cliente(Pessoa pessoa, boolean desconto) {
+    public Cliente(Pessoa pessoa, int desconto) {
         this.pessoa = pessoa;
         this.desconto = desconto;
     }
@@ -18,11 +16,15 @@ public class Cliente {
         this.pessoa = pessoa;
     }
 
-    public boolean isDesconto() {
+    public int getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(boolean desconto) {
+    public void setDesconto(int desconto) {
         this.desconto = desconto;
     }
+
+    public Cliente() {}
+
+   
 }

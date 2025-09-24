@@ -99,7 +99,6 @@ public class SiteLojaInstrumentos {
       System.out.println("Digite 2 para: Ver quem são nossos funcionarios!");
       System.out.println("Digite 3 para: Consultar quais instrumentos estão disponiveis");
       System.out.println("Digite 4 para: Comprar um instrumento");
-      System.out.println("Digite 5 para: Encomendar instrumentos!");
 
       switch (LER.nextInt()) {
         case 0:
@@ -118,10 +117,7 @@ public class SiteLojaInstrumentos {
           System.out.println();
           break;
         case 4:
-          loja.comprarInstrumento();
-          break;
-        case 5:
-          // encomendarInstrumentos();
+          loja.comprarInstrumento(vendax, loja);
           break;
         default:
           System.out.println("Digite uma ação valida!!!");

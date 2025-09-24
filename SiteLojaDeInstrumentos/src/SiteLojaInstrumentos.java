@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 public class SiteLojaInstrumentos {
@@ -88,10 +86,38 @@ public class SiteLojaInstrumentos {
 
   }
 
-  public static void comprarInstrumento(Loja loja){
-    int escolha = LER.nextInt();
+  public void removerInstrumento(){}
+  public void addInstrumento(){}
+  public void alterarInstrumento(){}
 
+  public void registrarFuncionario(Loja loja){
+    Pessoa pessoa = new Pessoa();
+    Funcionario funcionario = new Funcionario();
+
+    System.out.println("Digite o nome do proletario: ");
+    pessoa.setNome(LER.next());
+    System.out.println("Digite o cadastro de pessoa fisica: ");
+    pessoa.setCpf(LER.next());
+    System.out.println("Digite o numero de contato do proletario: ");
+    pessoa.setNumero(LER.next());
+
+    System.out.println("Qual sera o cargo que este funcionario vai desempenhar?: ");
+    funcionario.setCargo(LER.next());
+    System.out.println("Qual sera o salario do funcionario?: ");
+    funcionario.setSalario(LER.nextInt());
+    funcionario.setPessoa(pessoa);
+
+    loja.getFuncionarios().add(funcionario);
   }
+
+  public void demitirFuncionario(){}
+  public void alterarDadosFuncionario(){}
+
+
+  // public static void comprarInstrumento(Loja loja){
+  //   int escolha = LER.nextInt();
+
+  // }
 
   public static Loja criarBancoInicial() {
 

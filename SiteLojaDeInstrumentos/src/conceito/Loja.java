@@ -66,6 +66,7 @@ public class Loja {
         String criente = LER.next();
 
         for (Cliente client : loja.getClientes()) {
+            System.out.println(client.getPessoa().getNome());
             if (client.getPessoa().getNome().equals(criente)) {
                 clienteDVenda = client;
             }
@@ -75,6 +76,8 @@ public class Loja {
         if (clienteDVenda.getPessoa() == null) {
             registrarCliente(clientes);
             clienteDVenda = clientes.getLast();
+            System.out.println(clientes.toString());
+
         }
 
         float desconto = (float)clienteDVenda.getDesconto()/100;
@@ -94,6 +97,7 @@ public class Loja {
         novaPessoa.setNumero(LER.next());
         System.out.println("Desconto: ");
         novoCliente.setDesconto(LER.nextInt());
+        novoCliente.setPessoa(novaPessoa);
 
         clientes.addLast(novoCliente);
     }

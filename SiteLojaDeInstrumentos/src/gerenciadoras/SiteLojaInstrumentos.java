@@ -116,6 +116,7 @@ public class SiteLojaInstrumentos {
           System.out.println();
           break;
         case 4:
+        loja.buyInstrumento(vendax);
         //  loja.comprarInstrumento(vendax, loja);
           break;
         default:

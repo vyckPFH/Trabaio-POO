@@ -1,5 +1,6 @@
 package conceito;
 
+import gerenciadoras.Venda;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -20,17 +21,9 @@ public class Loja {
     private LinkedList<Instrumento> instrumentos = new LinkedList<>();
     private LinkedList<Cliente> clientes = new LinkedList<>();
 
-    public void atualizarBanco(Loja loja){
-        loja.setFuncionarios(funcionarios);
-        loja.setInstrumentos(instrumentos);
-        loja.setClientes(clientes);
-    }
-
     /*
      * Ações de administrador da loja
      */
-
-
 
     public void registrarCliente(LinkedList<Cliente> clientes) {
 
@@ -140,65 +133,62 @@ public class Loja {
 
     }
 
-    public void alterarDadosFuncionario(Loja loja) {
-
-    }
-
-    public void alterarInstrumento() {
-    
-    }
+    /*
+    * Patchs futuros:
+    */
+    public void alterarDadosFuncionario(Loja loja) {}
+    public void alterarInstrumento() {}
 
     /*
      * Ações de clientes da loja
      */
 
-    // public void comprarInstrumento(LinkedList<Venda> vendas, Loja loja) {
-    //     Cliente clienteDVenda = new Cliente();
-    //     LinkedList<Instrumento> vendidosInstrumentos = new LinkedList<>();
-    //     boolean repete = true;
-    //     float preco = 0f;
+    public void buyInstrumento(LinkedList<Venda> vendas) {
 
-    //     while (repete) {
-    //         System.out.println("Qual instrumento vc deseja comprar?: ");
-    //         String instrumento = LER.next();
+        System.out.println("Quem está realizando a venda?: ");
+        Cliente criente = findCliente(LER.next());
+        
+        if (criente == null) {
+            registrarCliente(clientes);
+            criente = clientes.getLast();
+        }
 
-    //         for (Instrumento instrumentoX : loja.getInstrumentos()) {
-    //             if (instrumentoX.getNome().equals(instrumento)) {
-    //                 vendidosInstrumentos.add(instrumentoX);
-    //                 int estoque = instrumentoX.getQuantidade();
-    //                 estoque--;
-    //                 loja.getInstrumentos().get(instrumentoX.setQuantidade(estoque);
-    //                 preco += instrumentoX.getPreco();
-    //             }
-    //         }
+        LinkedList<Instrumento> comprados = new LinkedList<>();
+        Venda venda = new Venda();
+        float valor = 0f;
+        int qtdInstrumentos = 0;
+        System.out.println("vc pretende comprar quantos instrumentos?: ");
+        qtdInstrumentos = LER.nextInt();
 
-    //         System.out.println("Comprar novamente? (true): sim (false): não");
-    //         repete = LER.nextBoolean();
-    //     }
+        for (int i = 0; i < qtdInstrumentos; i++) {
+            System.out.println("Diga o nome do instrumento que sera comprado: ");
+            Instrumento instrumento = findInstrumento(LER.next());
 
-    //     System.out.println("Qual cliente está realizando esta compra?: ");
-    //     String criente = LER.next();
+            if (instrumento.getQuantidade() == 0) {
+                System.out.println("Fora de estoque!!!");
+            } else {
+                comprados.add(instrumento);
+                valor += instrumento.getPreco();
 
-    //     for (Cliente client : loja.getClientes()) {
-    //         System.out.println(client.getNome());
-    //         if (client.getNome().equals(criente)) {
-    //             clienteDVenda = client;
-    //         }
-    //     }
+                int estoque = instrumento.getQuantidade();
+                estoque--;
+                instrumento.setQuantidade(estoque);
+                int pos = instrumentos.indexOf(instrumento);
+                instrumentos.set(pos, instrumento);
+            }
+        }
+        venda.setProdutosEscolhidos(comprados);
+        venda.setCliente(criente);
+        venda.setDesconto(criente.getDesconto());
+        valor = calcularValorComDesconto(valor, venda.getDesconto());
+        venda.setValorAPagar(valor);
+        venda.printVenda(venda);
+    }
 
-        // System.out.println(clienteDVenda.getPessoa().getNome());
-        // if (clienteDVenda.getCpf() == null) {
-        //     registrarCliente(clientes);
-        //     clienteDVenda = clientes.getLast();
-        //     System.out.println(clientes.toString());
-
-        // }
-
-    //     float desconto = (float) clienteDVenda.getDesconto() / 100;
-    //     preco = preco - (float) ((preco * desconto));
-    //     Venda venda = new Venda(vendidosInstrumentos, preco, clienteDVenda.getDesconto(), clienteDVenda);
-    //     vendas.add(venda);
-    // }
+    public float calcularValorComDesconto(float valor, int desconto) {
+        valor = valor * (float) (desconto * 0.01);
+        return valor;
+    }
 
     /*
      * Metodos de print dados gerais
@@ -239,21 +229,76 @@ public class Loja {
         for (Instrumento instrumento : instrumentos) {
 
             if (instrumento.getQuantidade() == 0) {
-                System.out.println("----INDISPONIVEL----");
-                System.out.println("    " + contador + ") " + instrumento.getNome() + " | Tipo: "
+                // System.out.println(" " + contador + ") " + instrumento.getNome() + " | Tipo:
+                // "
+                // + instrumento.getTipo()
+                // + " | Preço: R$" + instrumento.getPreco() + " | Cor: " + instrumento.getCor()
+                // + " | Tamanho: "
+                // + instrumento.getTamanho() + " | Quantidade: " +
+                // instrumento.getQuantidade());
+                String texto = ("    " + contador + ") " + instrumento.getNome() + " | Tipo: "
                         + instrumento.getTipo()
                         + " | Preço: R$" + instrumento.getPreco() + " | Cor: " + instrumento.getCor() + " | Tamanho: "
-                        + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade()
-                        );
+                        + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade());
+                texto = riscar(texto);
+                System.out.print("INDISPONIVEL-> ");
+                System.out.println(texto);
+                contador++;
+            } else {
+                String texto = ("    " + contador + ") " + instrumento.getNome() + " | Tipo: "
+                        + instrumento.getTipo()
+                        + " | Preço: R$" + instrumento.getPreco() + " | Cor: " + instrumento.getCor() + " | Tamanho: "
+                        + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade());
+                // System.out.println(" " + contador + ") " + instrumento.getNome() + " | Tipo:
+                // "
+                // + instrumento.getTipo()
+                // + " | Preço: R$" + instrumento.getPreco() + " | Cor: " + instrumento.getCor()
+                // + " | Tamanho: "
+                // + instrumento.getTamanho() + " | Quantidade: " +
+                // instrumento.getQuantidade());
+                System.out.println(texto);
                 contador++;
             }
-            System.out.println("    " + contador + ") " + instrumento.getNome() + " | Tipo: " + instrumento.getTipo()
-                    + " | Preço: R$" + instrumento.getPreco() + " | Cor: " + instrumento.getCor() + " | Tamanho: "
-                    + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade()
-                    );
 
-            contador++;
         }
+    }
+
+    /*
+     * funcionamento interno
+     */
+    //pesquisado
+    public String riscar(String texto) {
+        return "\u001b[9m" + texto + "\u001b[0m";
+    }
+
+    public Funcionario findFuncionario(String nome) {
+
+        for (Funcionario funcionario : funcionarios) {
+            if (funcionario.getNome().equalsIgnoreCase(nome)) {
+                return funcionario;
+            }
+        }
+        return null;
+    }
+
+    public Cliente findCliente(String nome) {
+
+        for (Cliente cliente : clientes) {
+            if (cliente.getNome().equalsIgnoreCase(nome)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+    public Instrumento findInstrumento(String nome) {
+
+        for (Instrumento instrumento : instrumentos) {
+            if (instrumento.getNome().equalsIgnoreCase(nome)) {
+                return instrumento;
+            }
+        }
+        return null;
     }
 
     /*
@@ -274,11 +319,8 @@ public class Loja {
     }
 
     /*
-     * 
      * Metodos GET and SET *
-     * 
      */
-
     public LinkedList<Cliente> getClientes() {
         return clientes;
     }

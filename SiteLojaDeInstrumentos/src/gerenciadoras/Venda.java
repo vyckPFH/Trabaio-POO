@@ -11,12 +11,29 @@ public class Venda {
     private Cliente cliente;
     // private Loja loja;
     
+    public Venda(){}
 
     public Venda(LinkedList<Instrumento> produtosEscolhidos, float valorAPagar, int desconto, Cliente cliente) {
         this.produtosEscolhidos = produtosEscolhidos;
         this.valorAPagar = valorAPagar;
         this.desconto = desconto;
         this.cliente = cliente;
+    }
+
+    public void printVenda(Venda venda) {
+        System.out.println("====================================");
+        System.out.println("\t RESUMO DA VENDA \t");
+        System.out.println("====================================");
+
+        // Informações do cliente
+        System.out.println("Cliente: " + venda.cliente.getNome());
+        System.out.println("CPF: " + venda.cliente.getCpf());
+        System.out.println("Desconto: " + venda.desconto + "%");
+        System.out.println("------------------------------------");    
+
+        // Valores
+        System.out.println("Valor final a pagar: R$" + valorAPagar);
+        System.out.println("====================================\n");
     }
 
     public LinkedList<Instrumento> getProdutosEscolhidos() {

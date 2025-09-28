@@ -10,7 +10,7 @@ public class SiteLojaInstrumentos {
 
   public static void main(String[] args) {
     boolean acess = true;
-
+    
     Loja loja = criarBancoInicial();
 
     while (acess) {
@@ -38,15 +38,13 @@ public class SiteLojaInstrumentos {
 
     }
 
-    // printBancoInicial(loja);
-
   }
 
   public static void acessarComoFornecedor(Loja loja) {
     boolean acess = true;
 
     while (acess) {
-      System.out.println("Escolha como você ira logar: ");
+      System.out.println("Escolha o que vc vai fzr: ");
       System.out.println("Digite 0 para: exit. ");
       System.out.println("Digite 1 para: adicionar um instrumento a loja; ");
       System.out.println("Digite 2 para: remover um instrumento da loja; ");
@@ -79,6 +77,7 @@ public class SiteLojaInstrumentos {
           loja.demitirFuncionario(loja);
           break;
         case 6:
+        //  loja.atualizarBanco(loja);
           loja.printSlaves();
         default:
           System.out.println("Digite uma escolha valida!");
@@ -89,7 +88,7 @@ public class SiteLojaInstrumentos {
   }
 
   public static void acessarComoCliente(Loja loja) {
-    LinkedList<Venda> vendax = new LinkedList();
+    LinkedList<Venda> vendax = new LinkedList<>();
     boolean acess = true;
 
     while (acess) {
@@ -117,7 +116,7 @@ public class SiteLojaInstrumentos {
           System.out.println();
           break;
         case 4:
-          loja.comprarInstrumento(vendax, loja);
+        //  loja.comprarInstrumento(vendax, loja);
           break;
         default:
           System.out.println("Digite uma ação valida!!!");
@@ -133,17 +132,14 @@ public class SiteLojaInstrumentos {
 
     Loja loja = new Loja("loja Da Roberta", 1, "Ifpr");
 
-    Funcionario prof = (new Funcionario(new Pessoa("Roberta", "n sei né", "n sei néhhhh"), 999999999,
-        "fazer pograma"));
-    Funcionario funcionarioPreguicoso = (new Funcionario(
-        new Pessoa("Willami", "n sei né", "n sei néhhhh"), 1518, "filosofo"));
-    Funcionario funcionarioNerdola = (new Funcionario(new Pessoa("Guxtavin", "n sei né2", "777"), 1518,
-        "kurt kobain 2"));
-    Funcionario funcionarioDaProGasto = (new Funcionario(new Pessoa("euzinha", "n sei né3", "666dnv"), 1518,
-        "querer comprar a loja inteira"));
-    Funcionario funcionarioFds = (new Funcionario(new Pessoa("Elias", "n sei né4", "fim de semana"),
-        1518, "vir trabalhar"));
-    Funcionario slaMano = (new Funcionario(new Pessoa("preguiça", "null", "1..."), 0, "existir."));
+    Funcionario prof = new Funcionario("Roberta", "n sei né", "n sei néhhhh", 999999999, "fazer pograma");
+
+    Funcionario funcionarioPreguicoso = new Funcionario("Willami", "n sei né", "n sei néhhhh", 1518, "filosofo");
+    Funcionario funcionarioNerdola = new Funcionario("Guxtavin", "n sei né2", "777", 1518, "kurt kobain 2");
+    Funcionario funcionarioDaProGasto = new Funcionario("euzinha", "n sei né3", "666dnv", 1518,
+        "querer comprar a loja inteira");
+    Funcionario funcionarioFds = new Funcionario("Elias", "n sei né4", "fim de semana", 1518, "vir trabalhar");
+    Funcionario slaMano = new Funcionario("preguisa", "null", "1...", 0, "existir.");
 
     loja.getFuncionarios().add(prof);
     loja.getFuncionarios().add(funcionarioPreguicoso);
@@ -152,16 +148,16 @@ public class SiteLojaInstrumentos {
     loja.getFuncionarios().add(funcionarioFds);
     loja.getFuncionarios().add(slaMano);
 
-    loja.getInstrumentos().add(new Instrumento("Violão", "Cordas", 750.00f, "Marrom", 2, 5, 03));
-    loja.getInstrumentos().add(new Instrumento("Guitarra", "Cordas", 5500.00f, "Vermelha", 3, 10, 01));
-    loja.getInstrumentos().add(new Instrumento("Baixo", "Cordas", 2200.00f, "Preto", 3, 2, 007));
-    loja.getInstrumentos().add(new Instrumento("Bateria", "Percussão", 8500.00f, "Azul", 3, 5, 06));
-    loja.getInstrumentos().add(new Instrumento("Teclado", "Teclas", 4200.00f, "Branco", 2, 3, 005));
-    loja.getInstrumentos().add(new Instrumento("Saxofone", "Sopro", 3900.00f, "Dourado", 2, 2, 004));
-    loja.getInstrumentos().add(new Instrumento("Flauta", "Sopro", 1200.00f, "Prata", 1, 6, 003));
-    loja.getInstrumentos().add(new Instrumento("Caixa", "Percussão", 950.00f, "Preta", 2, 32, 002));
-    loja.getInstrumentos().add(new Instrumento("Pandeiro", "Percussão", 180.00f, "Natural", 1, 8, 1));
-    loja.getInstrumentos().add(new Instrumento("Microfone", "Acessórios", 600.00f, "Cinza", 1, 15, 001));
+    loja.getInstrumentos().add(new Instrumento("Violao", "Cordas", 750.00f, "Marrom", 2, 5));
+    loja.getInstrumentos().add(new Instrumento("Guitarra", "Cordas", 5500.00f, "Vermelha", 3, 10));
+    loja.getInstrumentos().add(new Instrumento("Baixo", "Cordas", 2200.00f, "Preto", 3, 2));
+    loja.getInstrumentos().add(new Instrumento("Bateria", "Percussão", 8500.00f, "Azul", 3, 5));
+    loja.getInstrumentos().add(new Instrumento("Teclado", "Teclas", 4200.00f, "Branco", 2, 3));
+    loja.getInstrumentos().add(new Instrumento("Saxofone", "Sopro", 3900.00f, "Dourado", 2, 2));
+    loja.getInstrumentos().add(new Instrumento("Flauta", "Sopro", 1200.00f, "Prata", 1, 6));
+    loja.getInstrumentos().add(new Instrumento("Caixa", "Percussão", 950.00f, "Preta", 2, 32));
+    loja.getInstrumentos().add(new Instrumento("Pandeiro", "Percussão", 180.00f, "Natural", 1, 8));
+    loja.getInstrumentos().add(new Instrumento("Microfone", "Acessórios", 600.00f, "Cinza", 1, 15));
 
     return loja;
   }

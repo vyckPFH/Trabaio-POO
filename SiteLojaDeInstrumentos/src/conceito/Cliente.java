@@ -1,19 +1,13 @@
 package conceito;
-public class Cliente {
-    private Pessoa pessoa;
+
+public class Cliente extends Pessoa {
     private int desconto;
 
-    public Cliente(Pessoa pessoa, int desconto) {
-        this.pessoa = pessoa;
+    public Cliente(){}
+
+    public Cliente(int desconto, String nome, String cpf, String numero) {
+        super(nome, cpf, numero);
         this.desconto = desconto;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public int getDesconto() {
@@ -24,7 +18,4 @@ public class Cliente {
         this.desconto = desconto;
     }
 
-    public Cliente() {}
-
-   
 }

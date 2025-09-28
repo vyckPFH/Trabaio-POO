@@ -1,23 +1,17 @@
 package conceito;
-public class Funcionario {
-    private Pessoa pessoa;
+
+// Explicação no readme do motivo dp extends e super.
+public class Funcionario extends Pessoa { // extends indica qual classe Funcionario esta herdando
     private int salario;
     private String cargo;
 
-    public Funcionario() {}
+    public Funcionario() {
+    }
 
-    public Funcionario(Pessoa pessoa, int salario, String cargo) {
-        this.pessoa = pessoa;
+    public Funcionario(String nome, String cpf, String numero, int salario, String cargo) {
+        super(nome, cpf, numero); // super é um comando que chama o construtor da classe da qual funcionario herdou
         this.salario = salario;
         this.cargo = cargo;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public int getSalario() {
@@ -35,4 +29,5 @@ public class Funcionario {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+
 }

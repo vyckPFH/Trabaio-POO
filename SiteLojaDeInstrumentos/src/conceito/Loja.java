@@ -1,10 +1,18 @@
 package conceito;
 
-import gerenciadoras.Venda;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Loja {
+    /*
+     * SCANNER
+     */
+
+    final static Scanner LER = new Scanner(System.in);
+
+    /*
+     * Variaveis presentes em LOJA e suas declarações
+     */
     private String nome;
     private int cnpj;
     private String endereco;
@@ -12,104 +20,53 @@ public class Loja {
     private LinkedList<Instrumento> instrumentos = new LinkedList<>();
     private LinkedList<Cliente> clientes = new LinkedList<>();
 
-    public LinkedList<Cliente> getClientes() {
-        return clientes;
+    public void atualizarBanco(Loja loja){
+        loja.setFuncionarios(funcionarios);
+        loja.setInstrumentos(instrumentos);
+        loja.setClientes(clientes);
     }
 
-    public void setClientes(LinkedList<Cliente> clientes) {
-        this.clientes = clientes;
-    }
+    /*
+     * Ações de administrador da loja
+     */
 
-    final static Scanner LER = new Scanner(System.in);
 
-    public Loja() {
-        this.funcionarios = new LinkedList<>();
-        this.instrumentos = new LinkedList<>();
-    }
-
-    public Loja(String nome, int cnpj, String endereco) {
-        this.nome = nome;
-        this.cnpj = cnpj;
-        this.endereco = endereco;
-        this.funcionarios = new LinkedList<>();
-        this.instrumentos = new LinkedList<>();
-        this.clientes = new LinkedList<>();
-    }
-
-    public void comprarInstrumento(LinkedList<Venda> vendas, Loja loja) {
-        Cliente clienteDVenda = new Cliente();
-        LinkedList<Instrumento> vendidosInstrumentos = new LinkedList<>();
-        boolean repete = true;
-        float preco = 0f;
-
-        while (repete) {
-            System.out.println("Qual instrumento vc deseja comprar?: ");
-            String instrumento = LER.next();
-
-            for (Instrumento instrumentoX : loja.getInstrumentos()) {
-                if (instrumentoX.getNome().equals(instrumento)) {
-                    vendidosInstrumentos.add(instrumentoX);
-                    int estoque = instrumentoX.getQuantidade();
-                    estoque--;
-                    loja.getInstrumentos().get(instrumentoX.getId()).setQuantidade(estoque);
-                    preco += instrumentoX.getPreco();
-                }
-            }
-
-            System.out.println("Comprar novamente? (true): sim (false): não");
-            repete = LER.nextBoolean();
-        }
-                
-        
-
-        System.out.println("Qual cliente está realizando esta compra?: ");
-        String criente = LER.next();
-
-        for (Cliente client : loja.getClientes()) {
-            System.out.println(client.getPessoa().getNome());
-            if (client.getPessoa().getNome().equals(criente)) {
-                clienteDVenda = client;
-            }
-        }
-
-        // System.out.println(clienteDVenda.getPessoa().getNome());
-        if (clienteDVenda.getPessoa() == null) {
-            registrarCliente(clientes);
-            clienteDVenda = clientes.getLast();
-            System.out.println(clientes.toString());
-
-        }
-
-        float desconto = (float)clienteDVenda.getDesconto()/100;
-        preco = preco - (float) ((preco * desconto));
-        Venda venda = new Venda(vendidosInstrumentos, preco, clienteDVenda.getDesconto(), clienteDVenda);
-        vendas.add(venda);
-    }
 
     public void registrarCliente(LinkedList<Cliente> clientes) {
-        Pessoa novaPessoa = new Pessoa();
-        Cliente novoCliente = new Cliente();
-        System.out.println("Nome: ");
-        novaPessoa.setNome(LER.next());
-        System.out.println("cpf: ");
-        novaPessoa.setCpf(LER.next());
-        System.out.println("Numero: ");
-        novaPessoa.setNumero(LER.next());
-        System.out.println("Desconto: ");
-        novoCliente.setDesconto(LER.nextInt());
-        novoCliente.setPessoa(novaPessoa);
 
-        clientes.addLast(novoCliente);
+        Cliente cliente = new Cliente();
+
+        System.out.println("Nome: ");
+        cliente.setNome(LER.next());
+
+        System.out.println("cpf: ");
+        cliente.setCpf(LER.next());
+
+        System.out.println("Numero: ");
+        cliente.setNumero(LER.next());
+
+        System.out.println("Desconto: ");
+        cliente.setDesconto(LER.nextInt());
+
+        clientes.addLast(cliente);
     }
 
+    // @vyckPFH
     public void removerInstrumento(Loja loja) {
         System.out.println("Digite o nome do instrumento a ser removido: ");
         String inxtrumento = LER.next();
-        for (Instrumento instrumentox : loja.getInstrumentos()) {
-            if (instrumentox.getNome().equals(inxtrumento)) {
-                loja.getInstrumentos().remove(instrumentox);
+        Instrumento banido = null;
+
+        for (Instrumento instrumento : loja.getInstrumentos()) {
+            if (instrumento.getNome().equalsIgnoreCase(inxtrumento)) {
+                banido = instrumento;
+                break;
             }
         }
+        if (banido != null) {
+            loja.getInstrumentos().remove(banido);
+        }
+
     }
 
     public void addInstrumento(Loja loja) {
@@ -134,25 +91,23 @@ public class Loja {
         System.out.println("Digite a quantidade em estoque: ");
         instrumento.setQuantidade(LER.nextInt());
 
-        System.out.println("Digite o indetificador do instrumento: ");
-        instrumento.setId(LER.nextInt());
-
         loja.getInstrumentos().add(instrumento);
 
     }
 
     public void registrarFuncionario(Loja loja) {
-        Pessoa pessoa = new Pessoa();
         Funcionario funcionario = new Funcionario();
 
         System.out.print("Digite o nome do proletario: ");
-        pessoa.setNome(LER.next());
+        funcionario.setNome(LER.next());
         System.out.println();
+
         System.out.print("Digite o cadastro de pessoa fisica: ");
-        pessoa.setCpf(LER.next());
+        funcionario.setCpf(LER.next());
         System.out.println();
+
         System.out.print("Digite o numero de contato do proletario: ");
-        pessoa.setNumero(LER.next());
+        funcionario.setNumero(LER.next());
         System.out.println();
 
         System.out.print("Qual sera o cargo que este funcionario vai desempenhar?: ");
@@ -163,19 +118,24 @@ public class Loja {
         funcionario.setSalario(LER.nextInt());
         System.out.println();
 
-        funcionario.setPessoa(pessoa);
-
         loja.getFuncionarios().add(funcionario);
     }
 
+    // @vyckPFH
     public void demitirFuncionario(Loja loja) {
 
         System.out.println("Digite o nome do funcionario a ser demitido: ");
         String demitido = LER.next();
+        Funcionario funcionarioDemitido = null;
+
         for (Funcionario funcionario : loja.getFuncionarios()) {
-            if (funcionario.getPessoa().getNome().equals(demitido)) {
-                loja.getFuncionarios().remove(funcionario);
+            if (funcionario.getNome().equalsIgnoreCase(demitido)) {
+                funcionarioDemitido = funcionario;
+                break;
             }
+        }
+        if (loja.getFuncionarios().contains(funcionarioDemitido)) {
+            loja.getFuncionarios().remove(funcionarioDemitido);
         }
 
     }
@@ -185,12 +145,64 @@ public class Loja {
     }
 
     public void alterarInstrumento() {
+    
     }
 
-    // public static void comprarInstrumento(Loja loja){
-    // int escolha = LER.nextInt();
+    /*
+     * Ações de clientes da loja
+     */
 
+    // public void comprarInstrumento(LinkedList<Venda> vendas, Loja loja) {
+    //     Cliente clienteDVenda = new Cliente();
+    //     LinkedList<Instrumento> vendidosInstrumentos = new LinkedList<>();
+    //     boolean repete = true;
+    //     float preco = 0f;
+
+    //     while (repete) {
+    //         System.out.println("Qual instrumento vc deseja comprar?: ");
+    //         String instrumento = LER.next();
+
+    //         for (Instrumento instrumentoX : loja.getInstrumentos()) {
+    //             if (instrumentoX.getNome().equals(instrumento)) {
+    //                 vendidosInstrumentos.add(instrumentoX);
+    //                 int estoque = instrumentoX.getQuantidade();
+    //                 estoque--;
+    //                 loja.getInstrumentos().get(instrumentoX.setQuantidade(estoque);
+    //                 preco += instrumentoX.getPreco();
+    //             }
+    //         }
+
+    //         System.out.println("Comprar novamente? (true): sim (false): não");
+    //         repete = LER.nextBoolean();
+    //     }
+
+    //     System.out.println("Qual cliente está realizando esta compra?: ");
+    //     String criente = LER.next();
+
+    //     for (Cliente client : loja.getClientes()) {
+    //         System.out.println(client.getNome());
+    //         if (client.getNome().equals(criente)) {
+    //             clienteDVenda = client;
+    //         }
+    //     }
+
+        // System.out.println(clienteDVenda.getPessoa().getNome());
+        // if (clienteDVenda.getCpf() == null) {
+        //     registrarCliente(clientes);
+        //     clienteDVenda = clientes.getLast();
+        //     System.out.println(clientes.toString());
+
+        // }
+
+    //     float desconto = (float) clienteDVenda.getDesconto() / 100;
+    //     preco = preco - (float) ((preco * desconto));
+    //     Venda venda = new Venda(vendidosInstrumentos, preco, clienteDVenda.getDesconto(), clienteDVenda);
+    //     vendas.add(venda);
     // }
+
+    /*
+     * Metodos de print dados gerais
+     */
 
     public void printSlaves() {
         if (funcionarios.isEmpty()) {
@@ -200,9 +212,9 @@ public class Loja {
             System.out.println("  Funcionários:");
             for (Funcionario funcionario : funcionarios) {
                 System.out.println("    ----------------------------");
-                System.out.println("    Nome    : " + funcionario.getPessoa().getNome());
-                System.out.println("    CPF     : " + funcionario.getPessoa().getCpf());
-                System.out.println("    Número  : " + funcionario.getPessoa().getNumero());
+                System.out.println("    Nome    : " + funcionario.getNome());
+                System.out.println("    CPF     : " + funcionario.getCpf());
+                System.out.println("    Número  : " + funcionario.getNumero());
                 System.out.println("    Cargo   : " + funcionario.getCargo());
                 System.out.println("    Salário : " + funcionario.getSalario());
             }
@@ -226,22 +238,53 @@ public class Loja {
         int contador = 1;
         for (Instrumento instrumento : instrumentos) {
 
-            if (instrumento.getId() == 0) {
+            if (instrumento.getQuantidade() == 0) {
                 System.out.println("----INDISPONIVEL----");
                 System.out.println("    " + contador + ") " + instrumento.getNome() + " | Tipo: "
                         + instrumento.getTipo()
                         + " | Preço: R$" + instrumento.getPreco() + " | Cor: " + instrumento.getCor() + " | Tamanho: "
                         + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade()
-                        + " | ID para compra: " + instrumento.getId());
+                        );
                 contador++;
             }
             System.out.println("    " + contador + ") " + instrumento.getNome() + " | Tipo: " + instrumento.getTipo()
                     + " | Preço: R$" + instrumento.getPreco() + " | Cor: " + instrumento.getCor() + " | Tamanho: "
-                    + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade() + " | ID para compra: "
-                    + instrumento.getId());
+                    + instrumento.getTamanho() + " | Quantidade: " + instrumento.getQuantidade()
+                    );
 
             contador++;
         }
+    }
+
+    /*
+     * Construtores de LOJA
+     */
+    public Loja() {
+        this.funcionarios = new LinkedList<>();
+        this.instrumentos = new LinkedList<>();
+    }
+
+    public Loja(String nome, int cnpj, String endereco) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.funcionarios = new LinkedList<>();
+        this.instrumentos = new LinkedList<>();
+        this.clientes = new LinkedList<>();
+    }
+
+    /*
+     * 
+     * Metodos GET and SET *
+     * 
+     */
+
+    public LinkedList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(LinkedList<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
     public String getNome() {
